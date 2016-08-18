@@ -3,9 +3,11 @@
 namespace MangaScraper {
 	class Program {
 
-		private const string TAMESHIYO = "spi.tameshiyo.me";
+		private const string TAMESHIYO = "spi.tameshiyo.me";					// Sample: http://spi.tameshiyo.me/HENGO01SPI?page=3
 		private const string SHOGAKUKAN_TAMESHIYO = "shogakukan.tameshiyo.me";
-		private const string ALPHAPOLIS = "www.alphapolis.co.jp";
+		private const string ALPHAPOLIS = "www.alphapolis.co.jp";				// Sample: http://www.alphapolis.co.jp/content/sentence/114578/
+		private const string CHAMPION_CROSS = "chancro.jp";						// Sample: http://chancro.jp/comics/samurai/10
+		private const string CYCOMICS = "cycomi.com";							// Sample: https://cycomi.com/viewer.php?chapter_id=841
 
 		static void Main(string[] args) {
 			if (args.Length == 0) {
@@ -31,6 +33,12 @@ namespace MangaScraper {
 					}
 				case ALPHAPOLIS: {
 						scraper = new AlphaPolisScraper(uri);
+						scraper.LoadHTML();
+						scraper.Execute();
+						break;
+					}
+				case CHAMPION_CROSS: {
+						scraper = new ChampionCrossScraper(uri);
 						scraper.LoadHTML();
 						scraper.Execute();
 						break;

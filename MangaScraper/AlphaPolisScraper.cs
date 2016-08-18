@@ -1,9 +1,8 @@
-﻿using System;
-using System.Net;
-using System.IO;
+﻿using HtmlAgilityPack;
+using System;
 using System.Drawing;
-using System.Drawing.Imaging;
-using HtmlAgilityPack;
+using System.Text;
+using System.Net;
 
 namespace MangaScraper {
 	class AlphaPolisScraper : WebMangaScraper {
@@ -12,6 +11,9 @@ namespace MangaScraper {
 			: base(uri) { }
 
 		public override void Execute() {
+			//HtmlNode header_title = this.webPage.DocumentNode.SelectSingleNode("//title");
+			//this.title = header_title.InnerText;
+
 			HtmlNodeCollection payload = this.webPage.DocumentNode.SelectSingleNode("//div[@id='book']").ChildNodes;
 
 			foreach (HtmlNode node in payload) {
@@ -30,20 +32,12 @@ namespace MangaScraper {
 
 					string image_src = child.GetAttributeValue("src", "INVALID_LINK");
 					Image image = DownloadImage(image_src);
-					Console.WriteLine("Received image at " + image_src);
+					Console.WriteLine("Retrieving image at " + image_src);
 					this.OutputImages.Add(page_num, image);
 				}
 			}
 
 			WriteAllImagesToDirectory();
-		}
-
-		// Simple image downloader.
-		protected Image DownloadImage(string url) {
-			WebClient client = new WebClient();
-			byte[] dat = client.DownloadData(url);
-			MemoryStream mstream = new MemoryStream(dat);
-			return Image.FromStream(mstream, true, true);
 		}
 
 		// Not needed for this.

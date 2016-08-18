@@ -90,10 +90,18 @@ namespace MangaScraper {
 			}
 		}
 
+		protected Image DownloadImage(string url) {
+			WebClient client = new WebClient();
+			byte[] dat = client.DownloadData(url);
+			MemoryStream mstream = new MemoryStream(dat);
+			return Image.FromStream(mstream, true, true);
+		}
+
 		public static Image Base64ToImage(string input) {
 			byte[] rawbytes = Convert.FromBase64String(input);
 			MemoryStream stream = new MemoryStream(rawbytes);
 			return Image.FromStream(stream);
 		}
+
 	}
 }
