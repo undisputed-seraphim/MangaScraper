@@ -50,9 +50,9 @@
     <Compile Include="AlphaPolisScraper.cs" />
     <Compile Include="ChampionCrossScraper.cs" />
     <Compile Include="ComShoScraper.cs" />
-    <Compile Include="CycomicsScraper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestPageLoader.cs" />
     <Compile Include="WebMangaScraper.cs" />
     <Compile Include="ShogakukanScraper.cs" />
   </ItemGroup>
